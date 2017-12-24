@@ -1,4 +1,4 @@
-package linkedLists;
+package linkedLists.java;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

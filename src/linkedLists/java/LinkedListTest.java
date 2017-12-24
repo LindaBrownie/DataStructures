@@ -1,4 +1,4 @@
-package linkedLists;
+package linkedLists.java;
 
 public class LinkedListTest<T> {
 	
