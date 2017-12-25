@@ -67,6 +67,21 @@ function insertNth(head, index, data) {
   throw error();
 }
 
+function sortedInsert(head, data) {
+  var newNode = new Node(data);
+  if (head === null) {
+	return newNode;
+  }
+  if (newNode.data < head.data) {
+    newNode.next = head;
+    return newNode;
+  } else {
+    newNode.next = head.next;
+	  head.next = sortedInsert(head.next, data);
+  }
+  return head;
+}
+
 function testing(actual, expected, message) {
   if (expected === actual) {
 	console.log("*****PASSED!!!!!************** " + 
