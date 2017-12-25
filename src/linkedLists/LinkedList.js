@@ -54,6 +54,19 @@ function getNth(node, index) {
   return getNth(node.next, index - 1)
 }
 
+function insertNth(head, index, data) {
+  if(index === 0) {
+    var newNode = new Node(data);
+    newNode.next = head;
+    return newNode;
+  }
+  if(head) {
+    head.next = insertNth(head.next, index-1, data);
+    return head;
+  }
+  throw error();
+}
+
 function testing(actual, expected, message) {
   if (expected === actual) {
 	console.log("*****PASSED!!!!!************** " + 
