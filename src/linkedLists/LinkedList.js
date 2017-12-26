@@ -89,6 +89,18 @@ function insertSort(head) {
   return sortedInsert(insertSort(head.next), head.data);
 }
 
+function append(listA, listB) {
+  if (!listA) return listB;
+  if (!listB) return listA;
+  
+  var head = listA;
+  while (listA.next)
+    listA = listA.next;
+  listA.next = listB;
+  
+  return head;
+}
+
 function testing(actual, expected, message) {
   if (expected === actual) {
 	console.log("*****PASSED!!!!!************** " + 
