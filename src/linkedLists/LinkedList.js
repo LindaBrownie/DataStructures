@@ -22,34 +22,30 @@ function createLinkedList() {
 function length(head) {
   var current = head;
   var len = 0;
-   while(current){
-     current= current.next;
-     len++;
-   }
+  while(current){
+    current = current.next;
+    len++;
+  }
   
   return len;
 }
 
 function countGivenNode(head, data) {
-  var number = 0;
+  var count = 0;
   var prevNode = head;
   while(prevNode) {
-    if(prevNode.data === data){
-      number++;
+    if(prevNode.data === data) {
+      count++;
     }
     prevNode = prevNode.next;
   }
   
-  return number;
+  return count;
 }
 
 function getNth(node, index) {
-  if (node === null) {
-	throw new Error()
-  }
-  if (index === 0) {
-	return node
-  }
+  if (node === null) throw new Error();
+  if (index === 0) return node;
   
   return getNth(node.next, index - 1)
 }
@@ -69,23 +65,20 @@ function insertNth(head, index, data) {
 
 function sortedInsert(head, data) {
   var newNode = new Node(data);
-  if (head === null) {
-	return newNode;
-  }
+  if (head === null) return newNode;
+  
   if (newNode.data < head.data) {
     newNode.next = head;
     return newNode;
   } else {
-    newNode.next = head.next;
 	head.next = sortedInsert(head.next, data);
   }
   return head;
 }
 
 function insertSort(head) {
-  if (!head) { 
-    return null;
-  }
+  if (!head) return null;
+  
   return sortedInsert(insertSort(head.next), head.data);
 }
 
@@ -96,9 +89,41 @@ function append(listA, listB) {
   var head = listA;
   while (listA.next)
     listA = listA.next;
-  listA.next = listB;
+    listA.next = listB;
   
   return head;
+}
+
+function removeDuplicates(head) {
+  if(!head) return head;
+  
+  var node = head;
+  while (node.next){
+    if (node.data === node.next.data) {
+      node.next = node.next.next;
+    } else {
+      node = node.next;
+    }
+  }
+  
+  return head;
+}
+
+function Context(source, dest) {
+  this.source = source;
+  this.dest = dest;
+}
+
+function moveNode(source, dest) {
+  if (!source) throw error();
+  
+  var node = source;
+  source = source.next;
+  
+  node.next = dest;
+  dest = node;
+  
+  return new Context(source, dest);
 }
 
 function testing(actual, expected, message) {
