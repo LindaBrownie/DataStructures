@@ -77,9 +77,16 @@ function sortedInsert(head, data) {
     return newNode;
   } else {
     newNode.next = head.next;
-	  head.next = sortedInsert(head.next, data);
+	head.next = sortedInsert(head.next, data);
   }
   return head;
+}
+
+function insertSort(head) {
+  if (!head) { 
+    return null;
+  }
+  return sortedInsert(insertSort(head.next), head.data);
 }
 
 function testing(actual, expected, message) {
