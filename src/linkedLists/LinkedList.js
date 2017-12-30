@@ -71,7 +71,7 @@ function sortedInsert(head, data) {
     newNode.next = head;
     return newNode;
   } else {
-	head.next = sortedInsert(head.next, data);
+    head.next = sortedInsert(head.next, data);
   }
   return head;
 }
@@ -87,9 +87,9 @@ function append(listA, listB) {
   if (!listB) return listA;
   
   var head = listA;
-  while (listA.next)
-    listA = listA.next;
-    listA.next = listB;
+  while (listA.next) listA = listA.next;
+  
+  listA.next = listB;
   
   return head;
 }
@@ -126,17 +126,56 @@ function moveNode(source, dest) {
   return new Context(source, dest);
 }
 
+function alternatingSplit(head) {
+  if (!head.next) throw 'Error';
+
+  var toFirst = true;
+  var first = null;
+  var second = null;
+  
+  while (head) {
+    if (toFirst) first = append(first, new Node(head.data));
+    else second = append(second, new Node(head.data));
+    
+    head = head.next;
+    toFirst = !toFirst;
+  }
+  
+  return new Context(first, second);
+}
+
+function frontBackSplit(source, front, back) {
+  if (!source || !source.next) throw "Error";
+  
+  var front_last_node;
+  var slow = source;
+  var fast = source;
+  
+  while (fast) {
+    front_last_node = slow;
+    slow = slow.next;
+    fast = (fast.next) ? fast.next.next : null;
+  }
+  
+  front_last_node.next = null;
+  front.data = source.data;
+  front.next = source.next;
+  
+  back.data = slow.data;
+  back.next = slow.next;
+}
+
 function testing(actual, expected, message) {
   if (expected === actual) {
-	console.log("*****PASSED!!!!!************** " + 
-				"\nExpected: " + expected + 
-				"\nActual: " + actual + 
-				"\n" + message);
+    console.log("*****PASSED!!!!!************** " + 
+                "\nExpected: " + expected +
+                "\nActual: " + actual +
+                "\n" + message);
   } else {
-	console.log("========FAILED=======  " + 
-				"\nExpected: " + expected + 
-				"\nActual: " + actual + 
-				":(\n" + message);
+    console.log("========FAILED=======  " +
+                "\nExpected: " + expected + 
+                "\nActual: " + actual +
+                ":(\n" + message);
   }
 }
 
