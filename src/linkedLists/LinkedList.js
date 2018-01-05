@@ -165,6 +165,27 @@ function frontBackSplit(source, front, back) {
   back.next = slow.next;
 }
 
+function shuffleMerge(first, second) {
+  if(first === null) return second;
+  if(second === null) return first;
+
+  var newList; 
+  var toFirst = true;
+  
+  while (first || second) {
+    if (first && toFirst) {
+      newList = append(newList, new Node(first.data));
+      first = first.next;
+    } else if(second) {
+      newList = append(newList, new Node(second.data));
+      second = second.next;
+    }
+    toFirst = !toFirst;
+  }
+  
+  return newList;
+}
+
 function testing(actual, expected, message) {
   if (expected === actual) {
     console.log("*****PASSED!!!!!************** " + 
