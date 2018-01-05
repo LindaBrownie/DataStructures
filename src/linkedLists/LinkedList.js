@@ -186,6 +186,31 @@ function shuffleMerge(first, second) {
   return newList;
 }
 
+function sortedMerge(first, second) {
+  if (!first) return second;
+  if (!second) return first;
+  
+  var start = new Node();
+  var newList = start;
+  
+  while (first && second) { 
+    if(first.data <= second.data) {
+      newList.next = first;
+      first = first.next
+    } else {
+      newList.next = second
+      second = second.next;
+    }
+    newList = newList.next;
+  }
+  
+  //append the rest of the list
+  if (!first) { newList.next = second; }
+  if (!second) { newList.next = first; }
+  
+  return start.next;
+}
+
 function testing(actual, expected, message) {
   if (expected === actual) {
     console.log("*****PASSED!!!!!************** " + 
