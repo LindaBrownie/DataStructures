@@ -223,6 +223,31 @@ function mergeSort(list) {
   return sortedMerge(mergeSort(front), mergeSort(back));
 }
 
+function sortedIntersect(first, second) {
+  if(!first) return null;
+  if(!second) return null;
+  
+  var intersectedList = null;
+  
+  while (first && second) {
+    if(first.data < second.data) {
+      // move the first.next, if it is smaller
+      first = first.next;
+    } else if (first.data > second.data) {
+      // move the second.next, if it is smaller
+      second = second.next;
+    } else {
+      // append node to list if both are the same, 
+      // and move the first.next and second.next
+      intersectedList = append(intersectedList, new Node(first.data));
+      first = first.next;
+      second = second.next;
+    }
+  }
+  
+  return removeDuplicates(intersectedList);
+}
+
 function testing(actual, expected, message) {
   if (expected === actual) {
     console.log("*****PASSED!!!!!************** " + 
