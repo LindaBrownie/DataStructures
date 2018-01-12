@@ -211,6 +211,18 @@ function sortedMerge(first, second) {
   return start.next;
 }
 
+function mergeSort(list) {
+  if(!list) return list;
+  if(list.next === null) return list;
+  
+  var front = new Node();
+  var back = new Node();
+
+  frontBackSplit(list, front, back);
+  
+  return sortedMerge(mergeSort(front), mergeSort(back));
+}
+
 function testing(actual, expected, message) {
   if (expected === actual) {
     console.log("*****PASSED!!!!!************** " + 
