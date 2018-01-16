@@ -1,6 +1,6 @@
-function Node(data) {
-  this.data = data;
-  this.next = null;
+function Node(data, next) {
+  this.data = data === undefined ? null : data;
+  this.next = next;
 }
 
 function push(head, data) {
@@ -246,6 +246,20 @@ function sortedIntersect(first, second) {
   }
   
   return removeDuplicates(intersectedList);
+}
+
+function reverse(list) {
+  if(!list) return null;
+  
+  var start = list;
+  var prev = null;
+  while (start) {
+    prev = new Node(start.data, prev)
+    start = start.next;
+  }
+
+  list.data = prev.data;
+  list.next = prev.next;
 }
 
 function testing(actual, expected, message) {
