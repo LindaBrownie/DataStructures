@@ -10,13 +10,13 @@ function push(head, data) {
   return current;
 }
 
-function createLinkedList() {
-  var list = null;
-  list = push(list, 3);
-  list = push(list, 2);
-  list = push(list, 1);
+function createLinkedList(list) {
+  var newList = null;
+  for(var i=0; i<list.length; i++) {
+    newList = push(newList, list[i]);
+  }
   
-  return list;
+  return newList;
 }
 
 function length(head) {
@@ -296,7 +296,8 @@ function testing(actual, expected, message) {
   }
 }
 
-var list = createLinkedList();
+var newList = [3,2,1]
+var list = createLinkedList(newList);
 
 testing(length(null), 0, "Length of null list should be zero.");
 testing(length(new Node(99)), 1, "Length of single node list should be one.");
