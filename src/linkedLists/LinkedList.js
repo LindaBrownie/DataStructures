@@ -262,6 +262,26 @@ function reverse(list) {
   list.next = prev.next;
 }
 
+function reverse2(list) {
+  if (!list) return null;
+  
+  var reversedList = null;
+  while (list) {
+    reversedList = new Node(list.data , reversedList);
+    list = list.next;
+  }
+  
+  return reversedList;
+}
+
+function recursiveReverse(list, prev = null) {
+  if(list) {
+    return recursiveReverse(list.next, new Node(list.data, prev));
+  } else {
+    return prev;
+  }
+}
+
 function testing(actual, expected, message) {
   if (expected === actual) {
     console.log("*****PASSED!!!!!************** " + 
